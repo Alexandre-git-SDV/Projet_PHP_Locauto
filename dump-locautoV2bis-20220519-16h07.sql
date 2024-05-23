@@ -90,9 +90,8 @@ CREATE TABLE `Location` (
   CONSTRAINT `Location_Client_FK` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id_client`),
   CONSTRAINT `Location_Voiture0_FK` FOREIGN KEY (`id_voiture`) REFERENCES `Voiture` (`id_voiture`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET character_set_client = @saved_cs_client */; 
 
---
 -- Dumping data for table `Location`
 --
 
@@ -260,6 +259,28 @@ LOCK TABLES `choix_option` WRITE;
 INSERT INTO `choix_option` VALUES (1,1),(3,2),(3,3),(4,4);
 /*!40000 ALTER TABLE `choix_option` ENABLE KEYS */;
 UNLOCK TABLES;
+
+-- Ajout -- 
+-- Table pour l'organisation
+CREATE TABLE Organisation (
+    id_organisation INT PRIMARY KEY,
+    nom VARCHAR(255) NOT NULL
+);
+
+-- Insérer des valeurs dans la table Organisation
+INSERT INTO Organisation (id_organisation, nom) VALUES (1, 'Mairie de Rennes');
+INSERT INTO Organisation (id_organisation, nom) VALUES (2, 'Sup De Vinci');
+INSERT INTO Organisation (id_organisation, nom) VALUES (3, 'RICKROLLINC');
+INSERT INTO Organisation (id_organisation, nom) VALUES (4, 'QuoicouOrganisation');
+
+
+--
+
+-- Relation "appartient_a" entre Client et Organisation
+ALTER TABLE Client ADD COLUMN id_organisation INT;
+ALTER TABLE Client ADD CONSTRAINT fk_organisation FOREIGN KEY (id_organisation) REFERENCES Organisation(id_organisation);
+
+
 
 --
 -- Dumping routines for database 'locautoV2bis'
