@@ -81,11 +81,15 @@ header button {
     margin-bottom: 30px; /* Marge inférieure de 30 pixels */
     outline: none; /* Pas de contour */
     font-size: 20px; /* Taille de police de 20 pixels */
-    font-family: 'Playfair Display', serif; /* Police de caractères 'Playfair Display' ou une police de caractères de type serif */
+    font-family: '', serif; /* Police de caractères 'Playfair Display' ou une police de caractères de type serif */
     cursor: pointer; /* Curseur de la souris de type pointer */
 }
 
 .container {
+    border: solid;
+    border-color: #3a4a6b;
+    margin: 20px;
+    padding: 20px;
     display: flex;
     justify-content: space-around;
     padding: 20px;
@@ -131,3 +135,43 @@ header button {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* Définition des styles pour l'élément <footer> */
+footer {
+    margin-top: 40px; /* Marge supérieure de 40 pixels */
+    border-top: 5px solid #5b73a2; /* Bordure supérieure de 5 pixels solide avec la couleur #b43daa */
+    background-color: #7d98ce; /* Couleur de fond noire */
+    color: #fff; /* Couleur du texte blanc */
+    padding: 30px 100px; /* Espacement intérieur de 30 pixels en haut et en bas, 100 pixels à gauche et à droite */
+}
+
+/* Définition des styles pour les titres h1 à l'intérieur de l'élément <footer> */
+footer h1 {
+    font-family: '', serif; /* Police de caractères 'Playfair Display' ou une police de caractères de type serif */
+    border-bottom: 1px solid white; /* Bordure inférieure de 1 pixel solide avec la couleur blanche */
+    width: 20%; /* Largeur de 20% par rapport à son conteneur parent */
+    padding-bottom: 5px; /* Espacement inférieur de 5 pixels */
+}
+
+/* Définition des styles pour les éléments avec la classe 'services' à l'intérieur de l'élément <footer> */
+footer .services {
+    margin-top: -10px; /* Marge supérieure de -10 pixels pour compenser la marge par défaut */
+    display: flex; /* Utilisation du modèle de disposition flexbox */
+    flex-wrap: wrap; /* Les objets vont s'envelopper sur plusieurs lignes si nécessaire */
+}
+
+/* Définition des styles pour les éléments avec la classe 'service' à l'intérieur des éléments avec la classe 'services' à l'intérieur de l'élément <footer> */
+footer .services .service {
+    margin-right: 30px; /* Marge à droite de 30 pixels */
+}
+
+/* Définition des styles pour les paragraphes <p> à l'intérieur des éléments avec la classe 'service' à l'intérieur des éléments avec la classe 'services' à l'intérieur de l'élément <footer> */
+footer .services .service p {
+    max-width: 300px; /* Largeur maximale de 300 pixels */
+}
+
+/* Définition des styles pour l'élément avec l'ID 'contact' à l'intérieur de l'élément <footer> */
+footer #contact {
+    color: #9bcdff; /* Couleur du texte bleu clair */
+}
+
