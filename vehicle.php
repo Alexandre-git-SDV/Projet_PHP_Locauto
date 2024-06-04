@@ -13,7 +13,7 @@ try {
     $stmt->bindParam(':immatriculation', $immatriculation, PDO::PARAM_STR);
     $stmt->execute();
     echo "<table>\n";
-    echo "\t<tr><th>id_voiture</th><th>immatriculation</th><th>compteur</th><th>modele</th><th>marque</th><th>image</th></tr>\n";
+    echo "\t<tr><th>id_voiture</th><th>immatriculation</th><th>compteur</th><th>modele</th><th>marque</th><th>image</th><th>categorie</th><th>prix</th></tr>\n";
     while ($voiture = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $id_modele = $voiture["id_modele"];
         
@@ -32,6 +32,14 @@ try {
 
         $marque = $stmt3->fetch(PDO::FETCH_ASSOC);
         $image_path = 'images/' . $modele["image"];
+
+        $requete4 = 'SELECT * FROM categorie WHERE id_categorie = :id_categorie';
+        $stmt4 = $connexion->prepare($requete4);
+        $stmt4->bindParam(':id_categorie', $modele["id_categorie"], PDO::PARAM_INT);
+        $stmt4->execute();
+
+        $categorie = $stmt4->fetch(PDO::FETCH_ASSOC);
+        $id_categorie = $categorie["id_categorie"];
         
         echo "\t<tr>\n";
         echo "\t\t<td>" . $voiture["id_voiture"] . "</td>\n";
@@ -40,6 +48,8 @@ try {
         echo "\t\t<td>" . $modele["libelle"] . "</td>\n";
         echo "\t\t<td>" . $marque["libelle"] . "</td>\n";
         echo "\t\t<td><img src='" . $image_path . "' alt='Image de voiture' style='width:100px;height:auto;'><br>" . $image_path . "</td>\n";  // Affiche le chemin de l'image pour le débogage
+        echo "\t\t<td>" . $categorie["libelle"] . "</td>\n";
+        echo "\t\t<td>" . $categorie["prix"] . "</td>\n";
         echo "\t</tr>\n";
     }
     echo "</table>";
