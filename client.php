@@ -5,13 +5,26 @@
 </head>
 <body>
 <?php
-$id_client = $_GET["id_client"];
 try { 
     $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', '');
-    $requete = 'SELECT * FROM client WHERE id_client = :id_client';
-    $stmt = $connexion->prepare($requete);
-    $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
-    $stmt->execute();
+
+    if (isset($_GET["id_client"])) {
+        $id_client = $_GET["id_client"];
+        $requete = 'SELECT * FROM client WHERE id_client = :id_client';
+        $stmt = $connexion->prepare($requete);
+        $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
+        $stmt->execute();
+    } elseif (isset($_GET["nom_client"])) {
+        $nom_client = $_GET["nom_client"];
+        $requete = 'SELECT * FROM client WHERE nom LIKE :nom_client';
+        $stmt = $connexion->prepare($requete);
+        $stmt->bindParam(':nom_client', $nom_client, PDO::PARAM_STR);
+        $stmt->execute();
+    } else {
+        echo "Aucun client spécifié.";
+        exit;
+    }
+
     echo "<table>\n";
     echo "\t<tr><th>ID Client</th><th>Nom</th><th>Prenom</th><th>Adresse</th><th>Type de client</th><th>Organisation</th></tr>\n";
     while ($client = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -23,21 +36,13 @@ try {
         $stmt2->execute();
 
         $type_de_client = $stmt2->fetch(PDO::FETCH_ASSOC);
-        // $id_organisation = $client["id_organisation"];
 
-        // $requete3 = 'SELECT * FROM organisation WHERE id_organisation = :id_organisation';
-        // $stmt3 = $connexion->prepare($requete3);
-        // $stmt3->bindParam(':id_organisation', $id_organisation, PDO::PARAM_INT);
-        // $stmt3->execute();
-
-        // $organisation = $stmt3->fetch(PDO::FETCH_ASSOC);
         echo "\t<tr>\n";
         echo "\t\t<td>" . $client["id_client"] . "</td>\n";
         echo "\t\t<td>" . $client["nom"] . "</td>\n";
         echo "\t\t<td>" . $client["prenom"] . "</td>\n";
         echo "\t\t<td>" . $client["adresse"] . "</td>\n";
         echo "\t\t<td>" . $type_de_client["libelle"] . "</td>\n";
-        // echo "\t\t<td>" . $organisation["nom"] . "</td>\n";
         echo "\t</tr>\n";
     }
     echo "</table>";
