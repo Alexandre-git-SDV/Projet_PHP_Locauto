@@ -51,15 +51,16 @@ try {
     while ($ligne = $resultat->fetch()) {
         $image_path = 'images/' . $ligne["image"];
         // afficher le nom du modèle
-        echo "<div class='car-item'><label>" . $ligne["libelle"] . "</label>";
+        echo "<div class='car-item' style='border: 2px solid #000; border-radius: 10px; padding: 10px; margin: 10px; text-align: center; width: 150px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); background-color: #fff;'><label style='display: block; margin-bottom: 10px;'>" . $ligne["libelle"] . "</label>";
         echo "<input type='radio' name='immatriculation' value='" . $ligne["immatriculation"] . "' style='display:none;'>";
-        echo "<img src='" . $image_path . "' alt='Image de voiture' onclick='this.previousElementSibling.checked=true;'>";
+        echo "<img src='" . $image_path . "' alt='Image de voiture' style='width: 100px; height: auto; cursor: pointer;' onclick='this.previousElementSibling.checked=true;'>";
         echo "</div>";
     }
 } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage() . "<br/>";
     die();
 }
+
 ?>
 </div>
 <p><input type="submit" value="OK"></p>

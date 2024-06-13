@@ -6,7 +6,7 @@ body {
 }
 
 .header {
-    background-color: #94a9d7;
+    background-color: #bad0ff;
     padding: 10px;
     text-align: center;
 }
@@ -107,14 +107,11 @@ header button {
     cursor: pointer; /* Curseur de la souris de type pointer */
 }
 
-.container {
-    border: solid;
-    border-color: #3a4a6b;
-    margin: 20px;
-    padding: 20px;
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 200px 100px;
+    gap: 10px;
 }
 
 .box {
