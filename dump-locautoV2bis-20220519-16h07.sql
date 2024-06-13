@@ -273,7 +273,10 @@ INSERT INTO Organisation (id_organisation, nom) VALUES (2, 'Sup De Vinci');
 INSERT INTO Organisation (id_organisation, nom) VALUES (3, 'RICKROLLINC');
 INSERT INTO Organisation (id_organisation, nom) VALUES (4, 'QuoicouOrganisation');
 
-
+INSERT INTO appartient_a (id_client, id_organisation) VALUES (1, 1);
+INSERT INTO appartient_a (id_client, id_organisation) VALUES (2, 4);
+INSERT INTO appartient_a (id_client, id_organisation) VALUES (3, 3);
+INSERT INTO appartient_a (id_client, id_organisation) VALUES (4, 2);
 --
 
 -- Relation "appartient_a" entre Client et Organisation
