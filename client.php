@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Client</title>
-</head>
-<body>
 <?php
 try { 
     $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', '');
@@ -19,6 +13,12 @@ try {
     echo "<table>\n";
     echo "\t<tr><th>ID Client</th><th>Nom</th><th>Prenom</th><th>Adresse</th><th>Type de client</th><th>Organisation</th><th>Voiture Empruntée</th><th>Date Début</th><th>Date Fin</th><th>Compteur Début</th><th>Compteur Fin</th></tr>\n";
     while ($client = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo "\t<tr>\n";
+        echo "\t\t<td>" . $client["id_client"] . "</td>\n";
+        echo "\t\t<td>" . $client["nom"] . "</td>\n";
+        echo "\t\t<td>" . $client["prenom"] . "</td>\n";
+        echo "\t\t<td>" . $client["adresse"] . "</td>\n";
+
         $id_type_de_client = $client["id_type_de_client"];
 
         // Récupérer le type de client
@@ -27,6 +27,8 @@ try {
         $stmt2->bindParam(':id_type_de_client', $id_type_de_client, PDO::PARAM_INT);
         $stmt2->execute();
         $type_de_client = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+        echo "\t\t<td>" . $type_de_client["libelle"] . "</td>\n";
 
         // Récupérer l'organisation
         $requete3 = 'SELECT organisation.nom FROM organisation
@@ -37,6 +39,8 @@ try {
         $stmt3->execute();
         $organisation = $stmt3->fetch(PDO::FETCH_ASSOC);
 
+        echo "\t\t<td>" . $organisation["nom"] . "</td>\n";
+
         // Récupérer les locations
         $requete4 = 'SELECT location.date_debut, location.date_fin, location.compteur_debut, location.compteur_fin, voiture.immatriculation 
                      FROM location 
@@ -46,20 +50,18 @@ try {
         $stmt4->bindParam(':id_client', $client["id_client"], PDO::PARAM_INT);
         $stmt4->execute();
         $location = $stmt4->fetch(PDO::FETCH_ASSOC);
-        echo "\t<tr>\n";
-            echo "\t\t<td>" . $client["id_client"] . "</td>\n";
-            echo "\t\t<td>" . $client["nom"] . "</td>\n";
-            echo "\t\t<td>" . $client["prenom"] . "</td>\n";
-            echo "\t\t<td>" . $client["adresse"] . "</td>\n";
-            echo "\t\t<td>" . $type_de_client["libelle"] . "</td>\n";
-            echo "\t\t<td>" . $organisation["nom"] . "</td>\n";
+
+        if ($location) {
             echo "\t\t<td>" . $location["immatriculation"] . "</td>\n";
             echo "\t\t<td>" . $location["date_debut"] . "</td>\n";
             echo "\t\t<td>" . $location["date_fin"] . "</td>\n";
             echo "\t\t<td>" . $location["compteur_debut"] . "</td>\n";
             echo "\t\t<td>" . $location["compteur_fin"] . "</td>\n";
-            echo "\t</tr>\n";
+        } else {
+            echo "\t\t<td> pas de voiture louée</td>\n";
+        }
 
+        echo "\t</tr>\n";
     }
     echo "</table>";
 } catch (PDOException $e) {
@@ -67,5 +69,3 @@ try {
     die();
 }
 ?>
-</body>
-</html>
