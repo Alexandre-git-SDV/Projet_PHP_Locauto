@@ -267,6 +267,14 @@ CREATE TABLE Organisation (
     nom VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE appartient_a (
+    id_client INT,
+    id_organisation INT,
+    PRIMARY KEY (id_client, id_organisation),
+    FOREIGN KEY (id_client) REFERENCES Client(id_client),
+    FOREIGN KEY (id_organisation) REFERENCES Organisation(id_organisation)
+);
+
 -- Insérer des valeurs dans la table Organisation
 INSERT INTO Organisation (id_organisation, nom) VALUES (1, 'Mairie de Rennes');
 INSERT INTO Organisation (id_organisation, nom) VALUES (2, 'Sup De Vinci');
