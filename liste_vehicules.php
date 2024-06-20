@@ -14,9 +14,16 @@
         /* Zone de style pour le design */
         body {
             font-family: Arial, sans-serif;
+            background-color: #94a9d7;
         }
 
         h1 { /* Titre de la page*/
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        h2 {
             text-align: center;
             color: #333;
             margin-top: 20px;
@@ -68,51 +75,76 @@
             font-size: 16px;
             background-color: #0044cc;
             color: white;
-            border: none;
+            border-color: black;
+            border-style: solid;
             border-radius: 5px;
             cursor: pointer; /* Curseur main */
             transition: background-color 0.3s; /* Animation */
         }
 
         input[type="submit"]:hover { /* Style du bouton au survol */
-            background-color: #0033aa;
+            background-color: #91aeff;
         }
 
         .selected { /* Style de la voiture sélectionnée */
             border: 2px solid blue;
             box-shadow: 0 0 10px blue;
         }
-    </style>
-    <script>
-        function selectCar(element) {
-            // Suppression de la classe 'selected' de tous les éléments
-            var items = document.getElementsByClassName('car-item');
-            for (var i = 0; i < items.length; i++) {
-                items[i].classList.remove('selected');
-            }
-            // Ajout de la classe 'selected' à l'élément cliqué
-            element.classList.add('selected');
-            // Cocher le bouton radio correspondant
-            element.querySelector('input[type=radio]').checked = true;
+
+        form {
+            text-align: center;
+            margin-top: 20px;
         }
-    </script>
+
+        .vehicle-form input[type="text"],
+        .vehicle-form input[type="number"] {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+
+        .vehicle-form input[type="submit"] {
+            background-color: #0044cc;
+            color: white;
+            border-color: black;
+            border-style: solid;
+            border-radius: 5px;
+            cursor: pointer; /* Curseur main */
+            transition: background-color 0.3s; /* Animation */
+        }
+
+        .vehicle-form input[type="submit"]:hover {
+            background-color: #91aeff;
+        }
+
+    </style>
 </head>
-<body>
-<h1>Liste des véhicules</h1>
-<p style="text-align: center;">Choisissez un véhicule :</p>
+<body> 
+<h1>Menu : véhicules</h1>
+<h1>Choisissez un véhicule :</h1>
 <form action="vehicle.php" method="get">
 <div class="wrapper">
 <?php
 try {
-    $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', ''); // Connexion à la base de données
-    $requete = 'SELECT voiture.immatriculation, modele.image, modele.libelle FROM voiture JOIN modele ON voiture.id_modele = modele.id_modele';
+    $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', '');
+    $requete = 'SELECT voiture.immatriculation, modele.image, modele.libelle, voiture.archive 
+                FROM voiture JOIN modele ON voiture.id_modele = modele.id_modele';
     $resultat = $connexion->query($requete);
     while ($ligne = $resultat->fetch()) {
         $image_path = 'images/' . $ligne["image"];
-        // afficher le nom du modèle
-        echo "<div class='car-item' onclick='selectCar(this)'><label>" . $ligne["libelle"] . "</label>";
-        echo "<input type='radio' name='immatriculation' value='" . $ligne["immatriculation"] . "' style='display:none;'>";
-        echo "<img src='" . $image_path . "' alt='Image de voiture'>";
+        echo "<div class='car-item'>";
+        echo "<label>" . $ligne["libelle"] . "</label>";
+        echo "<input type='radio' name='immatriculation' value='" . $ligne["immatriculation"] . "' style='display:none;' id='" . $ligne["immatriculation"] . "'>";
+        echo "<img src='" . $image_path . "' alt='Image de voiture' onclick='selectCar(\"" . $ligne["immatriculation"] . "\")'>";
+        echo "<a href='modifier_voiture.php?immatriculation=" . $ligne["immatriculation"] . "'>Modifier</a><br>";
+        if ($ligne["archive"] == 0) {
+            echo "<a href='archiver_voiture.php?immatriculation=" . $ligne["immatriculation"] . "'>Archiver</a><br>";
+        } else {
+            echo "<span>Archivé</span><br>";
+        }
         echo "</div>";
     }
 } catch (PDOException $e) {
@@ -123,5 +155,25 @@ try {
 </div>
 <p><input type="submit" value="OK"></p>
 </form>
+
+<h2>Ajouter un véhicule</h2>
+<form class="vehicle-form" action="ajouter_voiture.php" method="post">
+    <input type="text" name="immatriculation" placeholder="Immatriculation" required>
+    <input type="number" name="compteur" placeholder="Compteur" required>
+    <input type="number" name="id_modele" placeholder="ID Modèle" required>
+    <input type="submit" value="Ajouter">
+</form>
+
+<script>
+function selectCar(id) {
+    var elements = document.querySelectorAll('.car-item');
+    elements.forEach(function(element) {
+        element.classList.remove('selected');
+    });
+    var selectedElement = document.getElementById(id).parentElement;
+    selectedElement.classList.add('selected');
+}
+</script>
+
 </body>
 </html>
