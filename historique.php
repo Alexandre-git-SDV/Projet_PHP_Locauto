@@ -1,19 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Barre de Navigation  -->
-    <nav>
-        <a href="page accueil.html"> <img src="locauto_remove.png" alt="image"> </a> <!-- Liste des véhicules disponibles -->
-        <div class="onglets">
-            <a href="#"> Contact / Support </a> <!-- Formulaire pour ajouter ou supprimer un client -->
-        </div>
-    </nav>
-
     <title>Détails du Véhicule</title>
     <link rel="stylesheet" href="stylephp.css"> <!-- Lien vers le fichier CSS -->
-<!DOCTYPE html>
-<html>
-<head>
     <style>
         /* Inline CSS for the design */
         body {
