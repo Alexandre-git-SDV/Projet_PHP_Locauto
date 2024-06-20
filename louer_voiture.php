@@ -24,18 +24,29 @@ try {
         if ($stmt_verification->rowCount() > 0) {
             echo "Erreur : Cette voiture est déjà louée pour les dates spécifiées.";
         } else {
-            // Insérer la location dans la table location
-            $requete = 'INSERT INTO location (id_client, id_voiture, date_debut, date_fin, compteur_debut) 
-                        VALUES (:id_client, :id_voiture, :date_debut, :date_fin, :compteur_debut)';
-            $stmt = $connexion->prepare($requete);
-            $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
-            $stmt->bindParam(':id_voiture', $id_voiture, PDO::PARAM_INT);
-            $stmt->bindParam(':date_debut', $date_debut, PDO::PARAM_STR);
-            $stmt->bindParam(':date_fin', $date_fin, PDO::PARAM_STR);
-            $stmt->bindParam(':compteur_debut', $compteur_debut, PDO::PARAM_INT);
-            $stmt->execute();
+            // Vérifier si la voiture est archivée
+            $requete_archive = 'SELECT archive FROM voiture WHERE id_voiture = :id_voiture';
+            $stmt_archive = $connexion->prepare($requete_archive);
+            $stmt_archive->bindParam(':id_voiture', $id_voiture, PDO::PARAM_INT);
+            $stmt_archive->execute();
+            $voiture = $stmt_archive->fetch(PDO::FETCH_ASSOC);
 
-            echo "Voiture louée avec succès.";
+            if ($voiture['archive'] == 1) {
+                echo "Erreur : Cette voiture est archivée et ne peut pas être louée.";
+            } else {
+                // Insérer la location dans la table location
+                $requete = 'INSERT INTO location (id_client, id_voiture, date_debut, date_fin, compteur_debut) 
+                            VALUES (:id_client, :id_voiture, :date_debut, :date_fin, :compteur_debut)';
+                $stmt = $connexion->prepare($requete);
+                $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
+                $stmt->bindParam(':id_voiture', $id_voiture, PDO::PARAM_INT);
+                $stmt->bindParam(':date_debut', $date_debut, PDO::PARAM_STR);
+                $stmt->bindParam(':date_fin', $date_fin, PDO::PARAM_STR);
+                $stmt->bindParam(':compteur_debut', $compteur_debut, PDO::PARAM_INT);
+                $stmt->execute();
+
+                echo "Voiture louée avec succès.";
+            }
         }
     }
 } catch (PDOException $e) {
@@ -43,4 +54,3 @@ try {
     die();
 }
 ?>
-

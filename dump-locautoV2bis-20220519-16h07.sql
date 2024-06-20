@@ -290,7 +290,8 @@ INSERT INTO appartient_a (id_client, id_organisation) VALUES (4, 2);
 -- Relation "appartient_a" entre Client et Organisation
 ALTER TABLE Client ADD COLUMN id_organisation INT;
 ALTER TABLE Client ADD CONSTRAINT fk_organisation FOREIGN KEY (id_organisation) REFERENCES Organisation(id_organisation);
-
+-- Ajout de la colonne "archive" dans la table Voiture
+ALTER TABLE voiture ADD archive TINYINT(1) DEFAULT 0;
 
 
 --
