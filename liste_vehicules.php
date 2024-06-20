@@ -3,7 +3,7 @@
 <head>
     <!-- Barre de Navigation  -->
     <nav>
-        <a href="page accueil.html"> <img src="locauto_remove.png" alt="image"> </a> <!-- Liste des vehicules disponible -->
+        <a href="page accueil.html"> <img src="locauto_remove.png" alt="image"> </a> <!-- Liste des véhicules disponibles -->
         <div class="onglets">
             <a href="https://www.linkedin.com/in/mathis-huard/"> Contact / Support </a> <!-- Formulaire pour ajouter ou supprimer un client -->
         </div>
@@ -17,7 +17,7 @@
             background-color: #94a9d7;
         }
 
-        h1 { /* Titre de la page*/
+        h1 { /* Titre de la page */
             text-align: center;
             color: #333;
             margin-top: 20px;
@@ -125,35 +125,35 @@
 <body> 
 <h1>Menu : véhicules</h1>
 <h1>Choisissez un véhicule :</h1>
-<form action="vehicle.php" method="get">
-<div class="wrapper">
-<?php
-try {
-    $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', '');
-    $requete = 'SELECT voiture.immatriculation, modele.image, modele.libelle, voiture.archive 
-                FROM voiture JOIN modele ON voiture.id_modele = modele.id_modele';
-    $resultat = $connexion->query($requete);
-    while ($ligne = $resultat->fetch()) {
-        $image_path = 'images/' . $ligne["image"];
-        echo "<div class='car-item'>";
-        echo "<label>" . $ligne["libelle"] . "</label>";
-        echo "<input type='radio' name='immatriculation' value='" . $ligne["immatriculation"] . "' style='display:none;' id='" . $ligne["immatriculation"] . "'>";
-        echo "<img src='" . $image_path . "' alt='Image de voiture' onclick='selectCar(\"" . $ligne["immatriculation"] . "\")'>";
-        echo "<a href='modifier_voiture.php?immatriculation=" . $ligne["immatriculation"] . "'>Modifier</a><br>";
-        if ($ligne["archive"] == 0) {
-            echo "<a href='archiver_voiture.php?immatriculation=" . $ligne["immatriculation"] . "'>Archiver</a><br>";
-        } else {
-            echo "<span>Archivé</span><br>";
+<form action="vehicle.php" method="get" id="vehicleForm">
+    <div class="wrapper">
+        <?php
+        try {
+            $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', '');
+            $requete = 'SELECT voiture.immatriculation, modele.image, modele.libelle, voiture.archive 
+                        FROM voiture JOIN modele ON voiture.id_modele = modele.id_modele';
+            $resultat = $connexion->query($requete);
+            while ($ligne = $resultat->fetch()) {
+                $image_path = 'images/' . $ligne["image"];
+                echo "<div class='car-item'>";
+                echo "<label>" . $ligne["libelle"] . "</label>";
+                echo "<input type='radio' name='immatriculation' value='" . $ligne["immatriculation"] . "' style='display:none;' id='car_" . $ligne["immatriculation"] . "'>";
+                echo "<img src='" . $image_path . "' alt='Image de voiture' onclick='selectCar(\"car_" . $ligne["immatriculation"] . "\")'>";
+                echo "<a href='modifier_voiture.php?immatriculation=" . $ligne["immatriculation"] . "'>Modifier</a><br>";
+                if ($ligne["archive"] == 0) {
+                    echo "<a href='archiver_voiture.php?immatriculation=" . $ligne["immatriculation"] . "'>Archiver</a><br>";
+                } else {
+                    echo "<span>Archivé</span><br>";
+                }
+                echo "</div>";
+            }
+        } catch (PDOException $e) {
+            echo "Erreur : " . $e->getMessage() . "<br/>";
+            die();
         }
-        echo "</div>";
-    }
-} catch (PDOException $e) {
-    echo "Erreur : " . $e->getMessage() . "<br/>";
-    die();
-}
-?>
-</div>
-<p><input type="submit" value="OK"></p>
+        ?>
+    </div>
+    <p><input type="submit" value="OK"></p>
 </form>
 
 <h2>Ajouter un véhicule</h2>
@@ -172,6 +172,7 @@ function selectCar(id) {
     });
     var selectedElement = document.getElementById(id).parentElement;
     selectedElement.classList.add('selected');
+    document.getElementById(id).checked = true;
 }
 </script>
 
