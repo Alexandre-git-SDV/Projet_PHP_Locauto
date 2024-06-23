@@ -1,0 +1,196 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #94a9d7;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #bad0ff;
+    padding: 10px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    color: #3a4a6b;
+}
+
+.vehicle-container {
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+}
+
+.vehicle-label {
+    cursor: pointer;
+    display: block;
+}
+
+.vehicle-image {
+    width: 100px;
+    height: auto;
+    margin-bottom: 5px;
+}
+
+.vehicle-text {
+    display: block;
+    margin-top: 5px;
+}
+
+/* Définition des styles pour l'élément <nav> */
+nav {
+    display: flex; /* Utilisation du modèle de disposition flexbox */
+    flex-wrap: wrap; /* Les objets vont s'envelopper sur plusieurs lignes si nécessaire */
+    justify-content: center; /* Les objets sont centrés horizontalement */
+    align-items: center; /* Alignement des objets au centre sur l'axe transversal */
+    border-bottom: 5px solid #233558; /* Bordure inférieure de 5 pixels solide avec la couleur #b43daa */
+}
+
+/* Définition des styles pour les titres h1 à l'intérieur de l'élément <nav> */
+nav h1 {
+    color: #3a4a6b; /* Couleur du texte rose */
+    font-family: 'Arial', sans-serif; /* Utilisation de la police Playfair Display ou une police serif par défaut */
+    font-size: 30px; /* Taille de police de 30 pixels */
+}
+
+/* Définition des styles pour les éléments avec la classe 'onglets' à l'intérieur de l'élément <nav> */
+nav .onglets {
+    margin-top: 3px; /* Marge supérieure de 3 pixels */
+    margin-left: 150px; /* Marge gauche de 300 pixels */
+}
+
+/* Définition des styles pour les liens <a> à l'intérieur des éléments avec la classe 'onglets' à l'intérieur de l'élément <nav> */
+nav .onglets a {
+    text-decoration: none; /* Pas de décoration de texte (soulignement par défaut) */
+    color: #000000; /* Couleur du texte noir */
+    margin-right: 10px; /* Marge droite de 10 pixels */
+    border-bottom: 1px solid #000000; /* Bordure inférieure de 1 pixel solide avec la couleur noire */
+    padding-bottom: 10px; /* Espacement intérieur inférieur de 5 pixels */
+}
+
+/* Définition des styles pour l'élément <header> */
+header {
+    display: flex; /* Utilisation du modèle de disposition flexbox */
+    flex-direction: column; /* Les objets seront disposés en colonne */
+    align-items: center; /* Alignement des objets au centre sur l'axe transversal */
+    background: #3a4a6b; /* Couleur de fond noire */
+    background-size: cover; /* La taille de l'image de fond est ajustée pour couvrir tout l'élément */
+    color: #fff; /* Couleur du texte blanc */
+    padding: 10px; /* Espacement intérieur de 15 pixels */
+}
+
+/* Définition des styles pour les titres h1 à l'intérieur de l'élément <header> */
+header h1 {
+    font-family: 'Arial', sans-serif; /* Police de caractères 'Playfair Display' ou une police de caractères de type serif */
+    font-size: 20px; /* Taille de police de 50 pixels */
+}
+
+/* Définition des styles pour les titres h4 à l'intérieur de l'élément <header> */
+header h4 {
+    margin-top: -20px; /* Marge supérieure de -20 pixels pour superposer le titre sur le titre précédent */
+    font-size: 20px; /* Taille de police de 20 pixels */
+    text-align: center; /* Alignement du texte au centre */
+    border-bottom: 1px solid #fff; /* Bordure inférieure de 1 pixel solide avec la couleur blanche */
+}
+
+/* Définition des styles pour les boutons à l'intérieur de l'élément <header> */
+header button {
+    padding: 10px 20px; /* Espacement intérieur de 10 pixels en haut et en bas, 20 pixels à gauche et à droite */
+    background-color: #ffffff; /* Couleur de fond blanche */
+    color: #000; /* Couleur du texte noir */
+    border: none; /* Pas de bordure */
+    margin-bottom: 30px; /* Marge inférieure de 30 pixels */
+    outline: none; /* Pas de contour */
+    font-size: 20px; /* Taille de police de 20 pixels */
+    font-family: '', serif; /* Police de caractères 'Playfair Display' ou une police de caractères de type serif */
+    cursor: pointer; /* Curseur de la souris de type pointer */
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 200px 100px;
+    gap: 10px;
+}
+
+.box {
+    background-color: #7d98ce;
+    width: 40%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.box h2 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #5b73a2;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Définition des styles pour l'élément <footer> */
+footer {
+    margin-top: 40px; /* Marge supérieure de 40 pixels */
+    border-top: 5px solid #5b73a2; /* Bordure supérieure de 5 pixels solide avec la couleur #b43daa */
+    background-color: #7d98ce; /* Couleur de fond noire */
+    color: #fff; /* Couleur du texte blanc */
+    padding: 30px 100px; /* Espacement intérieur de 30 pixels en haut et en bas, 100 pixels à gauche et à droite */
+}
+
+/* Définition des styles pour les titres h1 à l'intérieur de l'élément <footer> */
+footer h1 {
+    font-family: '', serif; /* Police de caractères 'Playfair Display' ou une police de caractères de type serif */
+    border-bottom: 1px solid white; /* Bordure inférieure de 1 pixel solide avec la couleur blanche */
+    width: 20%; /* Largeur de 20% par rapport à son conteneur parent */
+    padding-bottom: 5px; /* Espacement inférieur de 5 pixels */
+}
+
+/* Définition des styles pour les éléments avec la classe 'services' à l'intérieur de l'élément <footer> */
+footer .services {
+    margin-top: -10px; /* Marge supérieure de -10 pixels pour compenser la marge par défaut */
+    display: flex; /* Utilisation du modèle de disposition flexbox */
+    flex-wrap: wrap; /* Les objets vont s'envelopper sur plusieurs lignes si nécessaire */
+}
+
+/* Définition des styles pour les éléments avec la classe 'service' à l'intérieur des éléments avec la classe 'services' à l'intérieur de l'élément <footer> */
+footer .services .service {
+    margin-right: 30px; /* Marge à droite de 30 pixels */
+}
+
+/* Définition des styles pour les paragraphes <p> à l'intérieur des éléments avec la classe 'service' à l'intérieur des éléments avec la classe 'services' à l'intérieur de l'élément <footer> */
+footer .services .service p {
+    max-width: 300px; /* Largeur maximale de 300 pixels */
+}
+
+/* Définition des styles pour l'élément avec l'ID 'contact' à l'intérieur de l'élément <footer> */
+footer #contact {
+    color: #9bcdff; /* Couleur du texte bleu clair */
+}
+
