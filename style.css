@@ -86,13 +86,15 @@ header button {
 }
 
 .container {
-    border: solid;
+    border: solid 1px; /* Ajout d'une épaisseur de bordure */
+    border-radius: 30px;
     border-color: #3a4a6b;
     margin: 20px;
     padding: 20px;
     display: flex;
     justify-content: space-around;
 }
+
 
 .box {
     background-color: #7d98ce;
