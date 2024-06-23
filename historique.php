@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Détails du Véhicule</title>
+    <!-- Barre de Navigation  -->
+    <nav>
+        <a href="page accueil.html"> <img src="locauto_remove.png" alt="image"> </a> <!-- Liste des véhicules disponibles -->
+        <div class="onglets">
+            <a href="https://www.linkedin.com/in/mathis-huard/"> Contact / Support </a> <!-- Formulaire pour ajouter ou supprimer un client -->
+        </div>
+    </nav>
+    <title>Modifier Voiture</title>
     <link rel="stylesheet" href="stylephp.css"> <!-- Lien vers le fichier CSS -->
     <style>
         /* Inline CSS for the design */
@@ -10,9 +17,11 @@
             background-color: #94a9d7;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
             margin: 0;
+            flex-wrap: wrap;
+            align-content: flex-start;
         }
 
         .container {
