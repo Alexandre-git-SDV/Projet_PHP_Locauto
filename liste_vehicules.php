@@ -9,7 +9,7 @@
         </div>
     </nav>
     <title>Liste des véhicules</title>
-    <link rel="stylesheet" href="stylephp.css"> <!-- Lien vers le fichier CSS -->
+    <link rel="stylesheet" href="style.css"> <!-- Lien vers le fichier CSS -->
     <style>
         /* Zone de style pour le design */
         body {
@@ -18,23 +18,23 @@
         }
 
         h1 { /* Titre de la page */
-            text-align: center;
-            color: #333;
-            margin-top: 20px;
+            text-align: center; /* Centrage horizontal */
+            color: #333; /* Texte noir */
+            margin-top: 20px; /* Marge en haut */
         }
 
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-top: 20px;
+        h2 { /* Titre de section */
+            text-align: center; /* Centrage horizontal */
+            color: #333; /* Texte noir */
+            margin-top: 20px; /* Marge en haut */
         }
 
         .wrapper { /* Conteneur pour les voitures */
             display: flex; /* Affichage en ligne */
             flex-wrap: wrap; /* Retour à la ligne si besoin */
             justify-content: center; /* Centrage horizontal */
-            gap: 20px;
-            margin: 20px;
+            gap: 20px; /* Espacement entre les éléments */
+            margin: 20px; /* Marge autour du conteneur */
         }
 
         .car-item { /* Style des voitures */
@@ -69,55 +69,55 @@
         }
 
         input[type="submit"] { /* Style du bouton */
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #0044cc;
-            color: white;
-            border-color: black;
-            border-style: solid;
-            border-radius: 5px;
+            display: block; /* Affichage en bloc */
+            margin: 20px auto; /* Marge autour du bouton */
+            padding: 10px 20px; /* Espacement intérieur */
+            font-size: 16px; /* Taille de police */
+            background-color: #0044cc; /* Couleur de fond */
+            color: white; /* Texte blanc */
+            border-color: black; /* Bordure noire */
+            border-style: solid; /* Bordure pleine */
+            border-radius: 5px; /* Coins arrondis */
             cursor: pointer; /* Curseur main */
             transition: background-color 0.3s; /* Animation */
         }
 
         input[type="submit"]:hover { /* Style du bouton au survol */
-            background-color: #91aeff;
+            background-color: #91aeff; /* Couleur de fond plus claire */
         }
 
         .selected { /* Style de la voiture sélectionnée */
-            border: 2px solid blue;
-            box-shadow: 0 0 10px blue;
+            border: 2px solid blue; /* Bordure bleue */
+            box-shadow: 0 0 10px blue;  /* Ombre bleue */
         }
 
-        form {
-            text-align: center;
-            margin-top: 20px;
+        form { /* Formulaire pour ajouter un véhicule */
+            text-align: center; /* Centrage horizontal */
+            margin-top: 20px; /* Marge en haut */
         }
 
-        .vehicle-form input[type="text"],
-        .vehicle-form input[type="number"] {
-            margin: 5px;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            width: 200px;
+        .vehicle-form input[type="text"], /* Style des champs de texte */
+        .vehicle-form input[type="number"] { /* Style des champs numériques */
+            margin: 5px; /* Marge autour des champs */
+            padding: 10px; /* Espacement intérieur */
+            font-size: 16px; /* Taille de police */
+            border-radius: 5px; /* Coins arrondis */
+            border: 1px solid #ccc; /* Bordure grise */
+            width: 200px;   /* Largeur fixe */
         }
 
-        .vehicle-form input[type="submit"] {
-            background-color: #0044cc;
-            color: white;
-            border-color: black;
-            border-style: solid;
-            border-radius: 5px;
+        .vehicle-form input[type="submit"] { /* Style du bouton */
+            background-color: #0044cc; /* Couleur de fond */
+            color: white; /* Texte blanc */
+            border-color: black; /* Bordure noire */
+            border-style: solid; /* Bordure pleine */
+            border-radius: 5px; /* Coins arrondis */
             cursor: pointer; /* Curseur main */
             transition: background-color 0.3s; /* Animation */
         }
 
-        .vehicle-form input[type="submit"]:hover {
-            background-color: #91aeff;
+        .vehicle-form input[type="submit"]:hover { /* Style du bouton au survol */
+            background-color: #91aeff; /* Couleur de fond plus claire */
         }
 
     </style>
@@ -126,53 +126,53 @@
 <h1>Menu : véhicules</h1>
 <h1>Choisissez un véhicule :</h1>
 <form action="vehicle.php" method="get" id="vehicleForm">
-    <div class="wrapper">
+    <div class="wrapper"> <!-- Conteneur pour les voitures -->
         <?php
-        try {
-            $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', '');
-            $requete = 'SELECT voiture.immatriculation, modele.image, modele.libelle, voiture.archive 
-                        FROM voiture JOIN modele ON voiture.id_modele = modele.id_modele';
-            $resultat = $connexion->query($requete);
-            while ($ligne = $resultat->fetch()) {
-                $image_path = 'images/' . $ligne["image"];
-                echo "<div class='car-item'>";
-                echo "<label>" . $ligne["libelle"] . "</label>";
+        try { // Connexion à la base de données
+            $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', ''); // Connexion à la base de données
+            $requete = 'SELECT voiture.immatriculation, modele.image, modele.libelle, voiture.archive  
+                        FROM voiture JOIN modele ON voiture.id_modele = modele.id_modele'; // Requête SQL pour récupérer les informations des voitures
+            $resultat = $connexion->query($requete); // Exécution de la requête
+            while ($ligne = $resultat->fetch()) { // Parcours des lignes de résultat
+                $image_path = 'images/' . $ligne["image"]; // Chemin de l'image
+                echo "<div class='car-item'>"; // Début de la div pour la voiture
+                echo "<label>" . $ligne["libelle"] . "</label>"; // Libellé du modèle
                 echo "<input type='radio' name='immatriculation' value='" . $ligne["immatriculation"] . "' style='display:none;' id='car_" . $ligne["immatriculation"] . "'>";
                 echo "<img src='" . $image_path . "' alt='Image de voiture' onclick='selectCar(\"car_" . $ligne["immatriculation"] . "\")'>";
                 echo "<a href='modifier_voiture.php?immatriculation=" . $ligne["immatriculation"] . "'>Modifier</a><br>";
-                if ($ligne["archive"] == 0) {
+                if ($ligne["archive"] == 0) { // Si la voiture n'est pas archivée
                     echo "<a href='archiver_voiture.php?immatriculation=" . $ligne["immatriculation"] . "'>Archiver</a><br>";
-                } else {
+                } else { // Si la voiture est archivée
                     echo "<span>Archivé</span><br>";
-                }
+                } // Fin de la condition
                 echo "</div>";
             }
-        } catch (PDOException $e) {
+        } catch (PDOException $e) { // Gestion des erreurs
             echo "Erreur : " . $e->getMessage() . "<br/>";
-            die();
+            die(); // Arrêt du script
         }
         ?>
-    </div>
+    </div> <!-- Fin du conteneur pour les voitures -->
     <p><input type="submit" value="OK"></p>
 </form>
 
-<h2>Ajouter un véhicule</h2>
-<form class="vehicle-form" action="ajouter_voiture.php" method="post">
-    <input type="text" name="immatriculation" placeholder="Immatriculation" required>
-    <input type="number" name="compteur" placeholder="Compteur" required>
-    <input type="number" name="id_modele" placeholder="ID Modèle" required>
-    <input type="submit" value="Ajouter">
+<h2>Ajouter un véhicule</h2> <!-- Titre de section -->
+<form class="vehicle-form" action="ajouter_voiture.php" method="post"> <!-- Formulaire pour ajouter un véhicule -->
+    <input type="text" name="immatriculation" placeholder="Immatriculation" required>   <!-- Champ pour l'immatriculation -->
+    <input type="number" name="compteur" placeholder="Compteur" required> <!-- Champ pour le compteur --> 
+    <input type="number" name="id_modele" placeholder="ID Modèle" required> <!-- Champ pour l'ID du modèle -->
+    <input type="submit" value="Ajouter"> <!-- Bouton pour ajouter -->
 </form>
 
 <script>
-function selectCar(id) {
+function selectCar(id) { // Fonction pour sélectionner une voiture
     var elements = document.querySelectorAll('.car-item');
-    elements.forEach(function(element) {
-        element.classList.remove('selected');
-    });
-    var selectedElement = document.getElementById(id).parentElement;
-    selectedElement.classList.add('selected');
-    document.getElementById(id).checked = true;
+    elements.forEach(function(element) { // Parcours des éléments
+        element.classList.remove('selected'); // Suppression de la classe 'selected'
+    }); // Fin de la boucle
+    var selectedElement = document.getElementById(id).parentElement; // Élément parent de l'élément sélectionné
+    selectedElement.classList.add('selected'); // Ajout de la classe 'selected'
+    document.getElementById(id).checked = true; // Cocher l'élément sélectionné
 }
 </script>
 
