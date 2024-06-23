@@ -70,57 +70,57 @@
     <h1>Détails du Véhicule</h1>
     <div class="car-details">
     <?php
-    if (isset($_GET["immatriculation"])) {
-        $immatriculation = $_GET["immatriculation"];
+    if (isset($_GET["immatriculation"])) { // Vérification de l'existence de l'immatriculation
+        $immatriculation = $_GET["immatriculation"]; // Récupération de l'immatriculation
         try {
-            $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', '');
-            $requete = 'SELECT * FROM voiture WHERE immatriculation = :immatriculation';
-            $stmt = $connexion->prepare($requete);
-            $stmt->bindParam(':immatriculation', $immatriculation, PDO::PARAM_STR);
-            $stmt->execute();
-            while ($voiture = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $id_modele = $voiture["id_modele"];
+            $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', ''); // Connexion à la base de données
+            $requete = 'SELECT * FROM voiture WHERE immatriculation = :immatriculation'; // Requête SQL pour récupérer les informations de la voiture
+            $stmt = $connexion->prepare($requete); // Préparation de la requête
+            $stmt->bindParam(':immatriculation', $immatriculation, PDO::PARAM_STR); // Liaison de l'immatriculation
+            $stmt->execute();  // Exécution de la requête
+            while ($voiture = $stmt->fetch(PDO::FETCH_ASSOC)) { // Parcours des résultats
+                $id_modele = $voiture["id_modele"]; // Récupération de l'id du modèle
                 
-                $requete2 = 'SELECT * FROM modele WHERE id_modele = :id_modele';
-                $stmt2 = $connexion->prepare($requete2);
-                $stmt2->bindParam(':id_modele', $id_modele, PDO::PARAM_INT);
-                $stmt2->execute();
+                $requete2 = 'SELECT * FROM modele WHERE id_modele = :id_modele'; // Requête SQL pour récupérer les informations du modèle
+                $stmt2 = $connexion->prepare($requete2); // Préparation de la requête
+                $stmt2->bindParam(':id_modele', $id_modele, PDO::PARAM_INT); // Liaison de l'id du modèle
+                $stmt2->execute(); // Exécution de la requête
+                 
+                $modele = $stmt2->fetch(PDO::FETCH_ASSOC); // Récupération du modèle
+                $id_marque = $modele["id_marque"]; // Récupération de l'id de la marque
+
+                $requete3 = 'SELECT * FROM marque WHERE id_marque = :id_marque'; // Requête SQL pour récupérer les informations de la marque
+                $stmt3 = $connexion->prepare($requete3); // Préparation de la requête
+                $stmt3->bindParam(':id_marque', $id_marque, PDO::PARAM_INT); // Liaison de l'id de la marque
+                $stmt3->execute(); // Exécution de la requête
+
+                $marque = $stmt3->fetch(PDO::FETCH_ASSOC); // Récupération de la marque
+                $image_path = 'images/' . $modele["image"];  // Chemin de l'image
+
+                $requete4 = 'SELECT * FROM categorie WHERE id_categorie = :id_categorie'; // Requête SQL pour récupérer les informations de la catégorie
+                $stmt4 = $connexion->prepare($requete4); // Préparation de la requête
+                $stmt4->bindParam(':id_categorie', $modele["id_categorie"], PDO::PARAM_INT); // Liaison de l'id de la catégorie
+                $stmt4->execute(); // Exécution de la requête
+
+                $categorie = $stmt4->fetch(PDO::FETCH_ASSOC); // Récupération de la catégorie
                 
-                $modele = $stmt2->fetch(PDO::FETCH_ASSOC);
-                $id_marque = $modele["id_marque"];
-
-                $requete3 = 'SELECT * FROM marque WHERE id_marque = :id_marque';
-                $stmt3 = $connexion->prepare($requete3);
-                $stmt3->bindParam(':id_marque', $id_marque, PDO::PARAM_INT);
-                $stmt3->execute();
-
-                $marque = $stmt3->fetch(PDO::FETCH_ASSOC);
-                $image_path = 'images/' . $modele["image"];
-
-                $requete4 = 'SELECT * FROM categorie WHERE id_categorie = :id_categorie';
-                $stmt4 = $connexion->prepare($requete4);
-                $stmt4->bindParam(':id_categorie', $modele["id_categorie"], PDO::PARAM_INT);
-                $stmt4->execute();
-
-                $categorie = $stmt4->fetch(PDO::FETCH_ASSOC);
-                
-                echo "<div class='car-image'><img src='" . $image_path . "' alt='Image de voiture'></div>";
-                echo "<table>\n";
-                echo "\t<tr><th>Id Voiture</th><td>" . $voiture["id_voiture"] . "</td></tr>\n";
-                echo "\t<tr><th>Immatriculation</th><td>" . $voiture["immatriculation"] . "</td></tr>\n";
-                echo "\t<tr><th>Compteur</th><td>" . $voiture["compteur"] . "</td></tr>\n";
-                echo "\t<tr><th>Modèle</th><td>" . $modele["libelle"] . "</td></tr>\n";
-                echo "\t<tr><th>Marque</th><td>" . $marque["libelle"] . "</td></tr>\n";
-                echo "\t<tr><th>Catégorie</th><td>" . $categorie["libelle"] . "</td></tr>\n";
-                echo "\t<tr><th>Prix</th><td>" . $categorie["prix"] . "</td></tr>\n";
-                echo "</table>";
+                echo "<div class='car-image'><img src='" . $image_path . "' alt='Image de voiture'></div>"; // Affichage de l'image
+                echo "<table>\n"; // Affichage des informations de la voiture
+                echo "\t<tr><th>Id Voiture</th><td>" . $voiture["id_voiture"] . "</td></tr>\n"; // Affichage de l'id de la voiture
+                echo "\t<tr><th>Immatriculation</th><td>" . $voiture["immatriculation"] . "</td></tr>\n"; // Affichage de l'immatriculation
+                echo "\t<tr><th>Compteur</th><td>" . $voiture["compteur"] . "</td></tr>\n"; // Affichage du compteur
+                echo "\t<tr><th>Modèle</th><td>" . $modele["libelle"] . "</td></tr>\n"; // Affichage du modèle
+                echo "\t<tr><th>Marque</th><td>" . $marque["libelle"] . "</td></tr>\n"; // Affichage de la marque
+                echo "\t<tr><th>Catégorie</th><td>" . $categorie["libelle"] . "</td></tr>\n"; // Affichage de la catégorie
+                echo "\t<tr><th>Prix</th><td>" . $categorie["prix"] . "</td></tr>\n"; // Affichage du prix
+                echo "</table>"; // Fin du tableau
             }
-        } catch (PDOException $e) {
-            echo "Erreur : " . $e->getMessage() . "<br/>";
-            die();
+        } catch (PDOException $e) { // Gestion des erreurs
+            echo "Erreur : " . $e->getMessage() . "<br/>"; // Affichage du message d'erreur
+            die(); // Arrêt du script
         }
-    } else {
-        echo "Erreur : Immatriculation non spécifiée.";
+    } else { // Si l'immatriculation n'est pas spécifiée
+        echo "Erreur : Immatriculation non spécifiée."; // Affichage d'un message d'erreur
     }
     ?>
     </div>

@@ -85,50 +85,51 @@
         </div> -->
         <?php
         try {
-            $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', '');
+            $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', ''); // Connexion à la base de données
 
-            if (isset($_GET["nom_client"])) {
-                $nom_client = $_GET["nom_client"];
+            if (isset($_GET["nom_client"])) { // Vérification de l'existence du paramètre nom_client
+                $nom_client = $_GET["nom_client"]; // Récupération du paramètre nom_client
                 $requete = 'SELECT c.id_client, c.nom, c.prenom, l.date_debut, l.date_fin, l.compteur_debut, l.compteur_fin, v.immatriculation 
                             FROM client c
                             LEFT JOIN location l ON c.id_client = l.id_client
                             LEFT JOIN voiture v ON l.id_voiture = v.id_voiture
-                            WHERE c.nom LIKE :nom_client';
-                $stmt = $connexion->prepare($requete);
-                $nom_client = "%" . $nom_client . "%";
-                $stmt->bindParam(':nom_client', $nom_client, PDO::PARAM_STR);
-                $stmt->execute();
+                            WHERE c.nom LIKE :nom_client'; // Requête SQL pour récupérer les informations du client
+                $stmt = $connexion->prepare($requete); // Préparation de la requête
+                $nom_client = "%" . $nom_client . "%"; 
+                $stmt->bindParam(':nom_client', $nom_client, PDO::PARAM_STR); // Liaison du paramètre nom_client
+                $stmt->execute(); // Exécution de la requête
 
-                $locations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $locations = $stmt->fetchAll(PDO::FETCH_ASSOC); // Récupération des résultats de la requête
 
-                if (count($locations) > 0) {
-                    echo "<table>\n";
+                if (count($locations) > 0) { // Vérification de l'existence de clients
+                    echo "<table>\n"; // Affichage de la table des clients
+                    // Entête du tableau
                     echo "\t<tr><th>ID Client</th><th>Nom</th><th>Prénom</th><th>Date Début</th><th>Date Fin</th><th>Compteur Début</th><th>Compteur Fin</th><th>Immatriculation Voiture</th></tr>\n";
-                    foreach ($locations as $location) {
-                        echo "\t<tr>\n";
-                        echo "\t\t<td>" . $location["id_client"] . "</td>\n";
-                        echo "\t\t<td>" . $location["nom"] . "</td>\n";
-                        echo "\t\t<td>" . $location["prenom"] . "</td>\n";
-                        if ($location["date_debut"]) {
-                            echo "\t\t<td>" . $location["date_debut"] . "</td>\n";
-                            echo "\t\t<td>" . $location["date_fin"] . "</td>\n";
-                            echo "\t\t<td>" . $location["compteur_debut"] . "</td>\n";
-                            echo "\t\t<td>" . $location["compteur_fin"] . "</td>\n";
-                            echo "\t\t<td>" . $location["immatriculation"] . "</td>\n";
-                        } else {
-                            echo "\t\t<td colspan='5'>Pas encore loué de voiture</td>\n";
-                        }
-                        echo "\t</tr>\n";
+                    foreach ($locations as $location) { // Parcours des clients
+                        echo "\t<tr>\n"; // Ligne du tableau
+                        echo "\t\t<td>" . $location["id_client"] . "</td>\n"; // Affichage de id_client
+                        echo "\t\t<td>" . $location["nom"] . "</td>\n";  // Affichage de nom
+                        echo "\t\t<td>" . $location["prenom"] . "</td>\n"; // Affichage de prenom
+                        if ($location["date_debut"]) { // Vérification de la location
+                            echo "\t\t<td>" . $location["date_debut"] . "</td>\n"; // Affichage de date_debut
+                            echo "\t\t<td>" . $location["date_fin"] . "</td>\n"; // Affichage de date_fin
+                            echo "\t\t<td>" . $location["compteur_debut"] . "</td>\n"; // Affichage de compteur_debut
+                            echo "\t\t<td>" . $location["compteur_fin"] . "</td>\n"; // Affichage de compteur_fin
+                            echo "\t\t<td>" . $location["immatriculation"] . "</td>\n"; // Affichage de immatriculation
+                        } else { // Si le client n'a pas encore loué de voiture
+                            echo "\t\t<td colspan='5'>Pas encore loué de voiture</td>\n"; // Affichage d'un message
+                        } 
+                        echo "\t</tr>\n"; // Fin de la ligne du tableau
                     }
-                    echo "</table>";
-                } else {
-                    echo "<div class='no-client'>Aucun client trouvé avec ce nom.</div>";
+                    echo "</table>"; // Fin du tableau
+                } else { // Si aucun client n'est trouvé
+                    echo "<div class='no-client'>Aucun client trouvé avec ce nom.</div>"; // Message d'erreur
                 }
-            } else {
-                echo "<div class='no-client'>Nom du client non spécifié.</div>";
+            } else { // Si le paramètre nom_client n'est pas spécifié
+                echo "<div class='no-client'>Nom du client non spécifié.</div>"; // Message d'erreur
             }
-        } catch (PDOException $e) {
-            echo "<div class='no-client'>Erreur : " . $e->getMessage() . "</div>";
+        } catch (PDOException $e) { // Gestion des erreurs de connexion
+            echo "<div class='no-client'>Erreur : " . $e->getMessage() . "</div>"; // Affichage du message d'erreur
         }
         ?>
     </div>
