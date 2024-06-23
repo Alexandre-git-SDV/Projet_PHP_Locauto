@@ -6,7 +6,7 @@ body {
 }
 
 .header {
-    background-color: #94a9d7;
+    background-color: #6f87bc;
     padding: 10px;
     text-align: center;
 }
@@ -85,56 +85,54 @@ header button {
     cursor: pointer; /* Curseur de la souris de type pointer */
 }
 
-.container {
-    border: solid 1px; /* Ajout d'une épaisseur de bordure */
-    border-radius: 30px;
-    border-color: #3a4a6b;
-    margin: 20px;
-    padding: 20px;
-    display: flex;
-    justify-content: space-around;
+.container { /* Définition des styles pour l'élément <div> avec la classe 'container' */
+    border: solid; /* Bordure solide */
+    border-color: #161d2d; /* Couleur de la bordure noire */
+    margin: 20px; /* Marge de 20 pixels */
+    padding: 20px; /* Espacement intérieur de 20 pixels */
+    display: flex; /* Utilisation du modèle de disposition flexbox */
+    justify-content: space-around; /* Les objets sont répartis de manière égale avec un espacement autour */
 }
 
-
-.box {
-    background-color: #7d98ce;
-    width: 40%;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.box { /* Définition des styles pour l'élément <div> avec la classe 'box' */
+    background-color: #5d729e; /* Couleur de fond bleue */
+    width: 40%; /* Largeur de 40% par rapport à son conteneur parent */
+    padding: 20px; /* Espacement intérieur de 20 pixels */
+    border-radius: 10px; /* Rayon de bordure de 10 pixels */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre portée de 10 pixels avec une opacité de 0.1 */
 }
 
-.box h2 {
-    text-align: center;
+.box h2 { /* Définition des styles pour les titres h2 à l'intérieur de l'élément <div> avec la classe 'box' */
+    text-align: center; /* Alignement du texte au centre */
 }
 
-.form-group {
-    margin-bottom: 15px;
+.form-group { /* Définition des styles pour les éléments avec la classe 'form-group' */
+    margin-bottom: 15px; /* Marge inférieure de 15 pixels */
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
+.form-group label { /* Définition des styles pour les étiquettes <label> à l'intérieur des éléments avec la classe 'form-group' */
+    display: block; /* Les éléments sont affichés en tant que blocs */
+    margin-bottom: 5px; /* Marge inférieure de 5 pixels */
 }
 
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
+.form-group input { /* Définition des styles pour les champs de saisie <input> à l'intérieur des éléments avec la classe 'form-group' */
+    width: 100%; /* Largeur de 100% par rapport à son conteneur parent */
+    padding: 10px; /* Espacement intérieur de 10 pixels */
+    box-sizing: border-box;     /* La largeur et la hauteur incluent le remplissage et la bordure */
+    border: 1px solid #ccc; /* Bordure de 1 pixel solide avec la couleur #ccc */
     border-radius: 5px;
 }
 
-.form-group button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #5b73a2;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
+.form-group button { /* Définition des styles pour les boutons à l'intérieur des éléments avec la classe 'form-group' */
+    display: block; /* Les éléments sont affichés en tant que blocs */
+    width: 100%; /* Largeur de 100% par rapport à son conteneur parent */
+    padding: 10px; /* Espacement intérieur de 10 pixels */
+    background-color: #5b73a2; /* Couleur de fond bleue */
+    border: none; /* Pas de bordure */
+    color: #fff; /* Couleur du texte blanc */
+    font-size: 16px; /* Taille de police de 16 pixels */
+    border-radius: 5px; /* Rayon de bordure de 5 pixels */
+    cursor: pointer; /* Curseur de la souris de type pointer */
 }
 
 /* Définition des styles pour l'élément <footer> */
