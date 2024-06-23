@@ -9,7 +9,15 @@
         </div>
     </nav>
     <title>Liste des véhicules</title>
-    <link rel="stylesheet" href="stylephp.css"> <!-- Lien vers le fichier CSS -->
+    <link rel="stylesheet" href="style.css"> <!-- Lien vers le fichier CSS -->
+    <style>
+        /* Zone de style pour le design */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #94a9d7;
+            text-align: center;
+        }
+    </style>
 <?php
 try {
     $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', '');
